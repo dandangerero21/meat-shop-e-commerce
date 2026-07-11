@@ -1,0 +1,420 @@
+/* --- Parallax Hero Section --- */
+.hero-parallax-section {
+  position: relative;
+  height: 100vh;
+  height: 100dvh; /* Locked strictly to 100% viewport height */
+  width: 100%;
+  overflow: hidden;
+  background-color: #0b0d0f; /* Dark studio background to let steak visual pop */
+  display: flex;
+  align-items: center; /* Center elements vertically exactly like visual */
+  justify-content: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  will-change: transform;
+}
+
+.layer-bg {
+  z-index: 1;
+  align-items: center;
+}
+
+.parallax-bg-img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  opacity: 0.55; /* darken to let headers pop */
+  filter: brightness(0.5) contrast(1.1);
+}
+
+.layer-text {
+  z-index: 2;
+  align-items: center;
+  top: -24%; /* Shift text higher so it floats clearly above/behind the upper portion of the steak */
+}
+
+.parallax-title {
+  font-family: var(--heading);
+  font-size: 15vw;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  user-select: none;
+  background: linear-gradient(180deg, #FFFFFF 60%, rgba(255, 255, 255, 0.25) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.95;
+  text-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.layer-fg {
+  z-index: 3;
+  align-items: flex-end; /* Align cropped edge of base plate to viewport bottom border */
+}
+
+.parallax-fg-img {
+  max-height: 82%;
+  max-width: 85%;
+  object-fit: contain;
+  margin-bottom: -2px; /* Pull base edge slightly below crop border line */
+  filter: drop-shadow(0 -10px 40px rgba(0, 0, 0, 0.5));
+}
+
+.hero-content-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spacing out top and bottom rows matching visual */
+  padding: 7rem 4rem 3.5rem;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.hero-top-info {
+  display: flex;
+  justify-content: flex-start;
+  pointer-events: auto;
+}
+
+.eyebrow-badge {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FAF9F6;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.hero-desc-col {
+  max-width: 38ch;
+  text-align: left;
+}
+
+.hero-description {
+  font-size: 0.95rem;
+  color: rgba(250, 249, 246, 0.85);
+  line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions-row {
+  pointer-events: auto;
+}
+
+/* Slide pagination visual matching "10/15" */
+.hero-pagination {
+  font-family: var(--sans);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  display: flex;
+  align-items: baseline;
+  z-index: 5;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.hero-pagination span {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.6;
+  margin-left: 0.25rem;
+}
+
+/* Widescreen footer-style social texts matching visual */
+.hero-social-anchors {
+  display: flex;
+  gap: 1.5rem;
+  z-index: 5;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.hero-social-anchors a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: color 0.2s ease;
+  pointer-events: auto;
+}
+
+.hero-social-anchors a:hover {
+  color: #FFFFFF;
+}
+
+@media (max-width: 900px) {
+  .hero-content-overlay {
+    padding: 6rem 1.5rem 2rem;
+  }
+  .hero-bottom-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .hero-social-anchors {
+    display: none;
+  }
+  .parallax-title {
+    font-size: 18vw;
+  }
+  .parallax-fg-img {
+    max-height: 55%;
+  }
+}
+
+/* --- Sourcing / Our Farms Section --- */
+.farms-section {
+  width: 100%;
+  background-color: var(--bg-tint);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 7rem 4rem;
+  box-sizing: border-box;
+}
+
+.farms-content-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .farms-section {
+    padding: 4rem 1.5rem;
+  }
+  .farms-content-row {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+
+.farms-text-col {
+  flex: 1;
+}
+
+.farms-image-col {
+  flex: 1.1;
+  width: 100%;
+}
+
+.farms-desc {
+  font-size: 1rem;
+  color: var(--text-main);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.farms-stats-grid {
+  display: grid;
+  grid-template-cols: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .farms-stats-grid {
+    grid-template-cols: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.stat-box h3 {
+  font-family: var(--heading);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 0 0 0.25rem;
+  line-height: 1;
+}
+
+.stat-box p {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+}
+
+.farms-img-frame {
+  border: 1px solid var(--border-color);
+  padding: 6px;
+  background-color: var(--bg-card);
+  border-radius: 6px;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: flex;
+}
+
+.farms-showcase-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform 0.4s ease;
+}
+
+.farms-img-frame:hover .farms-showcase-img {
+  transform: scale(1.02);
+}
+
+/* --- Cold-Chain Logistics Stepper --- */
+.stepper-section {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 7rem 4rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .stepper-section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+.stepper-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step-item {
+  display: flex;
+  gap: 2.5rem;
+  text-align: left;
+}
+
+.step-num-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  border: 2px solid var(--accent);
+  background-color: var(--bg-card);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.step-line {
+  width: 2px;
+  flex: 1;
+  background-color: var(--border-color);
+  margin: 0.5rem 0;
+  min-height: 80px;
+}
+
+.step-content {
+  padding-bottom: 3.5rem;
+}
+
+.step-item:last-child .step-content {
+  padding-bottom: 0;
+}
+
+.step-content h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-header);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.step-content p {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.6;
+  max-width: 65ch;
+}
+
+/* --- Quality Standards Banner --- */
+.standards-banner {
+  display: grid;
+  grid-template-cols: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 5rem auto;
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .standards-banner {
+    grid-template-cols: 1fr;
+    gap: 2rem;
+    padding: 3rem 1.5rem;
+  }
+}
+
+.standard-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.standard-item svg {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  margin-bottom: 0.85rem;
+}
+
+.standard-item h4 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-header);
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.standard-item p {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}

@@ -1,0 +1,129 @@
+:root {
+  /* Premium Gourmet Charcoal Theme for high-end organic meat shop */
+  --bg-main: #0B0D0F;       /* Deep rich dark charcoal black background */
+  --bg-card: #131619;       /* Lighter slate-charcoal container for product cards */
+  --bg-tint: #0E1012;       /* Soft dark tint for alternate layout sections */
+  --text-main: #98A0A6;     /* Muted silver-grey for high-readability body text */
+  --text-header: #FFFFFF;   /* Solid white for headers and titles */
+  --border-color: #1E2226;  /* Thin dark border separator */
+  
+  --accent: #2BB373;        /* Vibrant grass-green representing organic fields */
+  --accent-hover: #38C080;
+  --accent-bg: rgba(43, 179, 115, 0.08);
+  --accent-border: rgba(43, 179, 115, 0.25);
+  
+  --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 20px 40px -10px rgba(43, 179, 115, 0.08);
+
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: -0.01em;
+  color-scheme: dark; /* Synced with charcoal dark mode layout */
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  /* Stretch completely to screen edges */
+  margin: 0;
+  text-align: center;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--heading);
+  color: var(--text-header);
+  font-weight: 800;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateY(2px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-card);
+  color: var(--text-header);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-tint);
+  border-color: var(--text-header);
+}
+
+.text-left {
+  text-align: left;
+}

@@ -1,0 +1,168 @@
+/* --- Shared Gourmet Charcoal Footer --- */
+.global-footer {
+  background-color: var(--bg-tint);
+  border-top: 1px solid var(--border-color);
+  padding: 5rem 4rem 3rem;
+  color: var(--text-main);
+  text-align: left;
+  margin-top: auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.footer-outer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-cols: 1.5fr 1fr 1fr 1.25fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 900px) {
+  .global-footer {
+    padding: 4rem 1.5rem 2rem;
+  }
+  .footer-grid {
+    grid-template-cols: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Brand Column */
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-header);
+}
+
+.footer-logo-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+}
+
+.footer-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.footer-logo-primary {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.footer-logo-secondary {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  max-width: 28ch;
+}
+
+/* Nav & Link Columns */
+.footer-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-header);
+  margin-bottom: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link-item {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.footer-link-item:hover {
+  color: var(--accent);
+}
+
+/* Details & Hours Column */
+.footer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.footer-details strong {
+  color: var(--text-header);
+}
+
+/* Bottom copyrights section */
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.footer-copyright {
+  font-size: 0.75rem;
+  color: var(--text-main);
+}
+
+.footer-certifications {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+}
+
+.footer-cert-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-cert-badge svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
