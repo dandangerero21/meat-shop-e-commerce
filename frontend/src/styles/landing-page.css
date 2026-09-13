@@ -2,7 +2,6 @@
 .hero-parallax-section {
   position: relative;
   width: 100%;
-  overflow: hidden;
   background-color: #0b0d0f; /* Dark studio background to let steak visual pop */
   display: flex;
   flex-direction: column;
@@ -12,8 +11,17 @@
   min-height: 250vh; /* Make section tall to allow scrolling through parallax features */
 }
 
+.parallax-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
 .parallax-layer {
-  position: fixed; /* Fix to viewport to allow parallax scrolling over it */
+  position: absolute; /* Positioned relative to sticky wrapper */
   top: 0;
   left: 0;
   width: 100%;
@@ -79,19 +87,14 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-}
-
-/* Spacer to push content down below initial hero view */
-.hero-spacer {
-  height: 100vh;
-  width: 100%;
+  margin-top: -100vh; /* Pull content up to overlap the sticky wrapper space */
 }
 
 .parallax-features-container {
   display: flex;
   flex-direction: column;
   gap: 15vh;
-  padding: 5rem 2rem 10rem;
+  padding: 100vh 2rem 10rem; /* Initial padding pushes first card below viewport fold */
   max-width: 1000px;
   margin: 0 auto;
   align-items: center;
@@ -143,7 +146,7 @@
 
 /* Fixed footer-style social texts */
 .hero-social-anchors {
-  position: fixed;
+  position: absolute;
   bottom: 2rem;
   right: 4rem;
   display: flex;

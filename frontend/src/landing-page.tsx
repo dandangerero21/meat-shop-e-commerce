@@ -79,34 +79,42 @@ function LandingPage({ onNavigate }: LandingPageProps) {
 
             {/* Extended Parallax Section */}
             <section className="hero-parallax-section">
-                {/* Background Layer */}
-                <div 
-                    className="parallax-layer layer-bg"
-                    style={{ transform: `translateY(${bgOffset}px)` }}
-                >
-                    <img src="/hero_bg.png" alt="Butcher Studio Background" className="parallax-bg-img" />
-                </div>
 
-                {/* Text Layer - Title */}
-                <div 
-                    className="parallax-layer layer-text"
-                    style={{ transform: `translateY(${textOffset}px)` }}
-                >
-                    <h1 className="parallax-title">PRIME</h1>
-                </div>
+                <div className="parallax-sticky-wrapper">
+                    {/* Background Layer */}
+                    <div
+                        className="parallax-layer layer-bg"
+                        style={{ transform: `translateY(${bgOffset}px)` }}
+                    >
+                        <img src="/hero_bg.png" alt="Butcher Studio Background" className="parallax-bg-img" />
+                    </div>
 
-                {/* Foreground Layer (Steak) */}
-                <div 
-                    className="parallax-layer layer-fg"
-                    style={{ transform: `translateY(${fgOffset}px)` }}
-                >
-                    <img src={transparentSteakSrc || "/hero_steak_isolated.png"} alt="Fresh Raw Ribeye Steak" className="parallax-fg-img" />
+                    {/* Text Layer - Title */}
+                    <div
+                        className="parallax-layer layer-text"
+                        style={{ transform: `translateY(${textOffset}px)` }}
+                    >
+                        <h1 className="parallax-title">PRIME</h1>
+                    </div>
+
+                    {/* Foreground Layer (Steak) */}
+                    <div
+                        className="parallax-layer layer-fg"
+                        style={{ transform: `translateY(${fgOffset}px)` }}
+                    >
+                        <img src={transparentSteakSrc || "/hero_steak_isolated.png"} alt="Fresh Raw Ribeye Steak" className="parallax-fg-img" />
+                    </div>
+
+                    {/* Fixed Social Footer Overlays */}
+                    <div className="hero-social-anchors">
+                        <a href="#instagram">Instagram.</a>
+                        <a href="#facebook">Facebook.</a>
+                        <a href="#youtube">Youtube.</a>
+                    </div>
                 </div>
 
                 {/* Parallax Content Layer - scrolls naturally but sits in front of parallax elements */}
                 <div className="parallax-content-layer">
-                    <div className="hero-spacer"></div>
-
                     {/* New Parallax-integrated Features */}
                     <div className="parallax-features-container">
                         <div className="feature-card">
@@ -131,13 +139,6 @@ function LandingPage({ onNavigate }: LandingPageProps) {
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* Fixed Social Footer Overlays */}
-                <div className="hero-social-anchors">
-                    <a href="#instagram">Instagram.</a>
-                    <a href="#facebook">Facebook.</a>
-                    <a href="#youtube">Youtube.</a>
                 </div>
             </section>
 
