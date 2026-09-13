@@ -252,7 +252,7 @@ function Header({ currentPage = 'landing', onNavigate }: HeaderProps) {
                                 </a>
                             )}
 
-                            <a href="#shop" className="cta-button" onClick={handleShopClick}>
+                            <a href="#shop" className="cta-button" onClick={handleShopClick} style={{ pointerEvents: 'auto' }}>
                                 <span className="cta-text">
                                     {user && user.role === 'SELLER' ? 'Seller Console' : 'Shop Fresh Cuts'}
                                 </span>

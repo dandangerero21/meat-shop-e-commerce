@@ -109,7 +109,7 @@ function LandingPage({ onNavigate }: LandingPageProps) {
 
                     {/* New Parallax-integrated Features */}
                     <div className="parallax-features-container">
-                        <div className="feature-card">
+                        <div className="feature-card" id="farms">
                             <img src="/pasture.png" alt="Pasture" className="feature-card-img" />
                             <div className="feature-card-text">
                                 <h3>Regenerative Grazing</h3>
@@ -124,7 +124,7 @@ function LandingPage({ onNavigate }: LandingPageProps) {
                             </div>
                         </div>
 
-                        <div className="feature-card">
+                        <div className="feature-card" id="process">
                             <div className="feature-card-text">
                                 <h3>Fast & Fresh</h3>
                                 <p>Delivered securely packaged in cold-chain logistics to maintain peak freshness upon arrival to your doorstep.</p>
