@@ -19,8 +19,10 @@ interface ShopProps {
 
 function Shop({ onNavigate }: ShopProps) {
     const [activeFilter, setActiveFilter] = useState("ALL");
+    const [searchQuery, setSearchQuery] = useState("");
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
     const filterTabs = [
         { id: "ALL", label: "All Cuts" },
@@ -55,9 +57,12 @@ function Shop({ onNavigate }: ShopProps) {
         }
     };
 
-    const filteredCuts = activeFilter === "ALL" 
-        ? products 
-        : products.filter(cut => cut.animalType === activeFilter);
+    const filteredCuts = products.filter(cut => {
+        const matchesFilter = activeFilter === "ALL" || cut.animalType === activeFilter;
+        const matchesSearch = cut.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              cut.description.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesFilter && matchesSearch;
+    });
 
     return (
         <div className="shop-layout">
@@ -66,25 +71,39 @@ function Shop({ onNavigate }: ShopProps) {
             <div className="shop-content-wrapper">
                 {/* Shop Page Title banner */}
                 <div className="shop-header-banner">
-                    <span className="section-eyebrow">THE BUTCHER SHOP</span>
-                    <h1 className="shop-page-title">Hand-Selected Cuts</h1>
+                    <h1 className="shop-page-title">The Butcher Shop</h1>
                     <p className="shop-page-subtitle">
-                        Custom portioned daily on order. Sealed under vacuum parameters and delivered frozen or sub-38°F.
+                        Hand-selected cuts, portioned daily.
                     </p>
                 </div>
 
-                {/* Dynamic animalType Filters */}
+                {/* Dynamic animalType Filters & Search */}
                 <div className="cuts-section">
-                    <div className="filter-tabs-container">
-                        {filterTabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                className={`filter-tab-btn ${activeFilter === tab.id ? 'active' : ''}`}
-                                onClick={() => setActiveFilter(tab.id)}
-                            >
-                                {tab.label}
-                            </button>
-                        ))}
+                    <div className="shop-controls">
+                        <div className="search-bar-container">
+                            <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35" />
+                            </svg>
+                            <input
+                                type="text"
+                                className="shop-search-input"
+                                placeholder="Search cuts..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </div>
+                        <div className="filter-tabs-container">
+                            {filterTabs.map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    className={`filter-tab-btn ${activeFilter === tab.id ? 'active' : ''}`}
+                                    onClick={() => setActiveFilter(tab.id)}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Storefront Products Catalog Grid */}
@@ -96,41 +115,25 @@ function Shop({ onNavigate }: ShopProps) {
                         ) : (
                             <>
                                 {filteredCuts.map((cut) => (
-                                    <div key={cut.id} className="product-card">
+                                    <div key={cut.id} className="product-card" onClick={() => setSelectedProduct(cut)}>
                                         <div className="card-outer">
                                             <div className="card-inner">
-                                                <div className="product-info-top">
-                                                    <span className="product-tag">{cut.category}</span>
-                                                    <span className="product-status-tag">
-                                                        In Stock
-                                                    </span>
-                                                </div>
-                                                
                                                 <div className="product-media-container">
                                                     <img src={cut.imageUrl} alt={cut.name} className="product-card-img" />
-                                                    <div className="vacuum-seal-badge">
-                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
-                                                        </svg>
-                                                        <span>COLD-CHAIN SECURED</span>
-                                                    </div>
+                                                </div>
+
+                                                <div className="product-info-top">
+                                                    <span className="product-category-text">{cut.category.replace('_', ' ')}</span>
+                                                    <span className="product-status-text">In Stock</span>
                                                 </div>
 
                                                 <h3 className="product-name">{cut.name}</h3>
-                                                <p className="product-specs">{cut.description}</p>
                                                 <div className="product-footer">
                                                     <div className="product-price-col">
                                                         <span className="price-value">${cut.price.toFixed(2)}</span>
                                                         <span className="price-unit">/ pkg</span>
                                                     </div>
-                                                    <button className="add-to-cart-btn">
-                                                        <span>Add to Box</span>
-                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                                                        </svg>
-                                                    </button>
                                                 </div>
-                                                <div className="product-card-date">Cut: Fresh Daily</div>
                                             </div>
                                         </div>
                                     </div>
@@ -149,6 +152,33 @@ function Shop({ onNavigate }: ShopProps) {
                     </div>
                 </div>
             </div>
+
+            {/* Product Modal */}
+            {selectedProduct && (
+                <div className="product-modal-overlay" onClick={() => setSelectedProduct(null)}>
+                    <div className="product-modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="modal-close-btn" onClick={() => setSelectedProduct(null)}>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <div className="modal-grid">
+                            <div className="modal-image-col">
+                                <img src={selectedProduct.imageUrl} alt={selectedProduct.name} />
+                            </div>
+                            <div className="modal-info-col">
+                                <span className="modal-category">{selectedProduct.category.replace('_', ' ')}</span>
+                                <h2>{selectedProduct.name}</h2>
+                                <p className="modal-price">${selectedProduct.price.toFixed(2)} <span>/ pkg</span></p>
+                                <p className="modal-description">{selectedProduct.description}</p>
+                                <button className="add-to-cart-btn">
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <Footer onNavigate={onNavigate} />
         </div>

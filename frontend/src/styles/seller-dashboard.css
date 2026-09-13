@@ -157,26 +157,46 @@
   margin-bottom: 4rem;
 }
 
-.dashboard-eyebrow-badge {
-  display: inline-block;
-  background-color: rgba(43, 179, 115, 0.08);
-  border: 1px solid rgba(43, 179, 115, 0.2);
-  color: var(--accent);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  padding: 0.35rem 0.75rem;
-  border-radius: 20px;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-}
-
 .dashboard-title {
   font-size: 2.75rem;
   font-weight: 800;
   color: var(--text-header);
   letter-spacing: -0.03em;
   margin: 0;
+}
+
+/* --- Analytics Row --- */
+.dashboard-analytics-row {
+  display: grid;
+  grid-template-cols: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.analytics-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.analytics-card h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.analytics-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-header);
+  letter-spacing: -0.02em;
 }
 
 /* --- Layout Grid (Asymmetric Bento) --- */
@@ -194,27 +214,17 @@
   }
 }
 
-/* --- Double-Bezel (Doppelrand) Nested Card Shells --- */
-.bezel-outer-shell {
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 24px;
-  padding: 6px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  transition: all 0.6s cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.bezel-outer-shell:hover {
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-}
-
-.bezel-inner-core {
+/* --- Clean Dashboard Cards --- */
+.dashboard-card-shell {
   background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.02);
-  border-radius: calc(24px - 6px);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.dashboard-card-inner {
   padding: 2.5rem;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.04);
 }
 
 .dashboard-card-title {
@@ -322,31 +332,25 @@
   gap: 1.25rem;
 }
 
-/* Nested Row Double-Bezel */
 .listing-item-outer {
-  background-color: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-  padding: 4px;
-  transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
 .listing-item-outer:hover {
-  border-color: rgba(43, 179, 115, 0.2);
-  background-color: rgba(43, 179, 115, 0.02);
+  border-color: var(--text-header);
   transform: translateX(4px);
 }
 
 .listing-item-card {
   background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.02);
-  border-radius: calc(12px - 4px);
   padding: 1.1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02);
 }
 
 .listing-item-left {

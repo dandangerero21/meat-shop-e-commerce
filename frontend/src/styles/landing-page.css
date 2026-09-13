@@ -1,22 +1,23 @@
 /* --- Parallax Hero Section --- */
 .hero-parallax-section {
   position: relative;
-  height: 100vh;
-  height: 100dvh; /* Locked strictly to 100% viewport height */
   width: 100%;
   overflow: hidden;
   background-color: #0b0d0f; /* Dark studio background to let steak visual pop */
   display: flex;
-  align-items: center; /* Center elements vertically exactly like visual */
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   border-bottom: 1px solid var(--border-color);
+  min-height: 250vh; /* Make section tall to allow scrolling through parallax features */
 }
 
 .parallax-layer {
-  position: absolute;
-  inset: 0;
+  position: fixed; /* Fix to viewport to allow parallax scrolling over it */
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   pointer-events: none;
   display: flex;
   justify-content: center;
@@ -72,82 +73,79 @@
   filter: drop-shadow(0 -10px 40px rgba(0, 0, 0, 0.5));
 }
 
-.hero-content-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
+.parallax-content-layer {
+  position: relative;
+  z-index: 4; /* Sits above parallax elements */
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Spacing out top and bottom rows matching visual */
-  padding: 7rem 4rem 3.5rem;
-  box-sizing: border-box;
-  pointer-events: none;
 }
 
-.hero-top-info {
-  display: flex;
-  justify-content: flex-start;
-  pointer-events: auto;
-}
-
-.eyebrow-badge {
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #FAF9F6;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  padding: 0.5rem 1.25rem;
-  border-radius: 4px;
-  text-transform: uppercase;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.hero-bottom-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+/* Spacer to push content down below initial hero view */
+.hero-spacer {
+  height: 100vh;
   width: 100%;
 }
 
-.hero-desc-col {
-  max-width: 38ch;
+.parallax-features-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15vh;
+  padding: 5rem 2rem 10rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  background-color: rgba(11, 13, 15, 0.85); /* Semi-transparent to reveal parallax bg */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.feature-card.offset-card {
+  align-self: flex-end;
+}
+
+.feature-card-img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.feature-card-text {
+  flex: 1;
   text-align: left;
 }
 
-.hero-description {
-  font-size: 0.95rem;
-  color: rgba(250, 249, 246, 0.85);
-  line-height: 1.6;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  margin-bottom: 1.5rem;
-}
-
-.hero-actions-row {
-  pointer-events: auto;
-}
-
-/* Slide pagination visual matching "10/15" */
-.hero-pagination {
-  font-family: var(--sans);
-  font-size: 2.25rem;
+.feature-card-text h3 {
+  font-size: 2rem;
   font-weight: 800;
-  color: #FFFFFF;
-  display: flex;
-  align-items: baseline;
-  z-index: 5;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  color: var(--text-header);
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
 }
 
-.hero-pagination span {
-  font-size: 1rem;
-  font-weight: 500;
-  opacity: 0.6;
-  margin-left: 0.25rem;
+.feature-card-text p {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  line-height: 1.6;
 }
 
-/* Widescreen footer-style social texts matching visual */
+/* Fixed footer-style social texts */
 .hero-social-anchors {
+  position: fixed;
+  bottom: 2rem;
+  right: 4rem;
   display: flex;
   gap: 1.5rem;
   z-index: 5;
@@ -169,14 +167,6 @@
 }
 
 @media (max-width: 900px) {
-  .hero-content-overlay {
-    padding: 6rem 1.5rem 2rem;
-  }
-  .hero-bottom-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
   .hero-social-anchors {
     display: none;
   }
@@ -186,235 +176,14 @@
   .parallax-fg-img {
     max-height: 55%;
   }
-}
-
-/* --- Sourcing / Our Farms Section --- */
-.farms-section {
-  width: 100%;
-  background-color: var(--bg-tint);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  padding: 7rem 4rem;
-  box-sizing: border-box;
-}
-
-.farms-content-row {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  gap: 5rem;
-  align-items: center;
-  text-align: left;
-}
-
-@media (max-width: 900px) {
-  .farms-section {
-    padding: 4rem 1.5rem;
-  }
-  .farms-content-row {
+  .feature-card {
     flex-direction: column;
-    gap: 3rem;
-  }
-}
-
-.farms-text-col {
-  flex: 1;
-}
-
-.farms-image-col {
-  flex: 1.1;
-  width: 100%;
-}
-
-.farms-desc {
-  font-size: 1rem;
-  color: var(--text-main);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.farms-stats-grid {
-  display: grid;
-  grid-template-cols: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-  border-top: 1px solid var(--border-color);
-  padding-top: 2rem;
-}
-
-@media (max-width: 600px) {
-  .farms-stats-grid {
-    grid-template-cols: 1fr;
-    gap: 1.25rem;
-  }
-}
-
-.stat-box h3 {
-  font-family: var(--heading);
-  font-size: 2.25rem;
-  font-weight: 800;
-  color: var(--accent);
-  margin: 0 0 0.25rem;
-  line-height: 1;
-}
-
-.stat-box p {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-main);
-}
-
-.farms-img-frame {
-  border: 1px solid var(--border-color);
-  padding: 6px;
-  background-color: var(--bg-card);
-  border-radius: 6px;
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
-  display: flex;
-}
-
-.farms-showcase-img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 4px;
-  transition: transform 0.4s ease;
-}
-
-.farms-img-frame:hover .farms-showcase-img {
-  transform: scale(1.02);
-}
-
-/* --- Cold-Chain Logistics Stepper --- */
-.stepper-section {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 7rem 4rem;
-  box-sizing: border-box;
-}
-
-@media (max-width: 900px) {
-  .stepper-section {
-    padding: 4rem 1.5rem;
-  }
-}
-
-.stepper-container {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.step-item {
-  display: flex;
-  gap: 2.5rem;
-  text-align: left;
-}
-
-.step-num-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 44px;
-}
-
-.step-number {
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
-  border: 2px solid var(--accent);
-  background-color: var(--bg-card);
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.1rem;
-  box-shadow: var(--shadow-soft);
-}
-
-.step-line {
-  width: 2px;
-  flex: 1;
-  background-color: var(--border-color);
-  margin: 0.5rem 0;
-  min-height: 80px;
-}
-
-.step-content {
-  padding-bottom: 3.5rem;
-}
-
-.step-item:last-child .step-content {
-  padding-bottom: 0;
-}
-
-.step-content h3 {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--text-header);
-  margin: 0 0 0.5rem;
-  letter-spacing: -0.01em;
-}
-
-.step-content p {
-  font-size: 0.95rem;
-  color: var(--text-main);
-  line-height: 1.6;
-  max-width: 65ch;
-}
-
-/* --- Quality Standards Banner --- */
-.standards-banner {
-  display: grid;
-  grid-template-cols: repeat(3, 1fr);
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 5rem auto;
-  padding: 4rem 2rem;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  text-align: left;
-}
-
-@media (max-width: 900px) {
-  .standards-banner {
-    grid-template-cols: 1fr;
+    padding: 2rem;
     gap: 2rem;
-    padding: 3rem 1.5rem;
+    align-self: center; /* Remove offset on mobile */
   }
-}
-
-.standard-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.standard-item svg {
-  width: 28px;
-  height: 28px;
-  color: var(--accent);
-  margin-bottom: 0.85rem;
-}
-
-.standard-item h4 {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--text-header);
-  margin: 0 0 0.35rem;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.standard-item p {
-  font-size: 0.85rem;
-  color: var(--text-main);
-  line-height: 1.5;
+  .feature-card-img {
+    width: 100%;
+    height: 200px;
+  }
 }

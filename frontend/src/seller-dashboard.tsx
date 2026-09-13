@@ -226,8 +226,23 @@ function SellerDashboard({ onNavigate }: SellerDashboardProps) {
                 <div className="dashboard-container">
                     <div className="dashboard-header-row">
                         <div>
-                            <span className="dashboard-eyebrow-badge">Back-Office Systems</span>
                             <h1 className="dashboard-title">Seller Dashboard</h1>
+                        </div>
+                    </div>
+
+                    {/* Analytics / Overview Section */}
+                    <div className="dashboard-analytics-row">
+                        <div className="analytics-card">
+                            <h3>Total Active Listings</h3>
+                            <div className="analytics-value">{products.length}</div>
+                        </div>
+                        <div className="analytics-card">
+                            <h3>Average Listing Price</h3>
+                            <div className="analytics-value">
+                                ${products.length > 0
+                                    ? (products.reduce((acc, curr) => acc + curr.price, 0) / products.length).toFixed(2)
+                                    : "0.00"}
+                            </div>
                         </div>
                     </div>
 
@@ -235,9 +250,9 @@ function SellerDashboard({ onNavigate }: SellerDashboardProps) {
                     {successMsg && <div className="auth-alert-full success">{successMsg}</div>}
 
                     <div className="dashboard-grid">
-                        {/* Column 1: Create Product Form inside Double-Bezel nested shell */}
-                        <div className="bezel-outer-shell">
-                            <div className="bezel-inner-core">
+                        {/* Column 1: Create Product Form */}
+                        <div className="dashboard-card-shell">
+                            <div className="dashboard-card-inner">
                                 <h2 className="dashboard-card-title">Register New Cut</h2>
                                 <form onSubmit={handleCreateListing} className="dashboard-form-fields">
                                     <div className="dashboard-form-group">
@@ -332,9 +347,9 @@ function SellerDashboard({ onNavigate }: SellerDashboardProps) {
                             </div>
                         </div>
 
-                        {/* Column 2: Listings List inside Double-Bezel nested shell */}
-                        <div className="bezel-outer-shell">
-                            <div className="bezel-inner-core">
+                        {/* Column 2: Listings List */}
+                        <div className="dashboard-card-shell">
+                            <div className="dashboard-card-inner">
                                 <h2 className="dashboard-card-title">Active Market Listings</h2>
                                 {loading ? (
                                     <p style={{ color: 'var(--text-main)' }}>Loading listings inventory...</p>
