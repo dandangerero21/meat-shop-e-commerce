@@ -20,12 +20,35 @@ function Header({ currentPage = 'landing', onNavigate }: HeaderProps) {
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [avatarError, setAvatarError] = useState(false);
 
+    const [activeSection, setActiveSection] = useState<'home' | 'cuts' | 'farms' | 'process'>('home');
+
     useEffect(() => {
         setAvatarError(false);
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
+
+            // Scroll spy for landing page sections
+            if (currentPage === 'landing') {
+                const sections: ('process' | 'farms' | 'cuts')[] = ['process', 'farms', 'cuts'];
+                const scrollY = window.scrollY + 220;
+                let matched = false;
+
+                for (const secId of sections) {
+                    const el = document.getElementById(secId);
+                    if (el && scrollY >= el.offsetTop) {
+                        setActiveSection(secId);
+                        matched = true;
+                        break;
+                    }
+                }
+                if (!matched) {
+                    setActiveSection('home');
+                }
+            }
         };
-        window.addEventListener('scroll', handleScroll);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
 
         // Check for active user session in localStorage
         const storedToken = localStorage.getItem("token");
@@ -59,7 +82,12 @@ function Header({ currentPage = 'landing', onNavigate }: HeaderProps) {
         e.preventDefault();
         closeMenu();
         if (onNavigate) {
-            onNavigate('landing');
+            if (currentPage !== 'landing') {
+                onNavigate('landing');
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setActiveSection('home');
+            }
         }
     };
 
@@ -111,12 +139,25 @@ function Header({ currentPage = 'landing', onNavigate }: HeaderProps) {
         e.preventDefault();
         closeMenu();
         if (onNavigate) {
-            onNavigate('landing');
-            if (targetHash) {
+            if (currentPage !== 'landing') {
+                onNavigate('landing');
                 setTimeout(() => {
+                    if (targetHash) {
+                        const el = document.getElementById(targetHash);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }, 120);
+            } else {
+                if (targetHash) {
                     const el = document.getElementById(targetHash);
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
         }
     };
@@ -148,22 +189,29 @@ function Header({ currentPage = 'landing', onNavigate }: HeaderProps) {
                             {currentPage === 'landing' ? (
                                 <>
                                     <a 
-                                        href="/" 
-                                        className="nav-link active"
+                                        href="#hero" 
+                                        className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}
                                         onClick={handleLogoClick}
                                     >
                                         Home
                                     </a>
                                     <a 
+                                        href="#cuts" 
+                                        className={`nav-link ${activeSection === 'cuts' ? 'active' : ''}`}
+                                        onClick={(e) => handleHomeLinkClick(e, 'cuts')}
+                                    >
+                                        The Cuts
+                                    </a>
+                                    <a 
                                         href="#farms" 
-                                        className="nav-link"
+                                        className={`nav-link ${activeSection === 'farms' ? 'active' : ''}`}
                                         onClick={(e) => handleHomeLinkClick(e, 'farms')}
                                     >
                                         Our Farms
                                     </a>
                                     <a 
                                         href="#process" 
-                                        className="nav-link"
+                                        className={`nav-link ${activeSection === 'process' ? 'active' : ''}`}
                                         onClick={(e) => handleHomeLinkClick(e, 'process')}
                                     >
                                         Our Process
@@ -284,27 +332,35 @@ function Header({ currentPage = 'landing', onNavigate }: HeaderProps) {
                         {currentPage === 'landing' ? (
                             <>
                                 <a 
-                                    href="/" 
-                                    className="mobile-nav-link"
+                                    href="#hero" 
+                                    className={`mobile-nav-link ${activeSection === 'home' ? 'active' : ''}`}
                                     onClick={handleLogoClick}
                                 >
                                     <span className="mobile-link-num">01</span>
                                     <span className="mobile-link-text">Home</span>
                                 </a>
                                 <a 
-                                    href="#farms" 
-                                    className="mobile-nav-link"
-                                    onClick={(e) => handleHomeLinkClick(e, 'farms')}
+                                    href="#cuts" 
+                                    className={`mobile-nav-link ${activeSection === 'cuts' ? 'active' : ''}`}
+                                    onClick={(e) => handleHomeLinkClick(e, 'cuts')}
                                 >
                                     <span className="mobile-link-num">02</span>
+                                    <span className="mobile-link-text">The Cuts</span>
+                                </a>
+                                <a 
+                                    href="#farms" 
+                                    className={`mobile-nav-link ${activeSection === 'farms' ? 'active' : ''}`}
+                                    onClick={(e) => handleHomeLinkClick(e, 'farms')}
+                                >
+                                    <span className="mobile-link-num">03</span>
                                     <span className="mobile-link-text">Our Farms</span>
                                 </a>
                                 <a 
                                     href="#process" 
-                                    className="mobile-nav-link"
+                                    className={`mobile-nav-link ${activeSection === 'process' ? 'active' : ''}`}
                                     onClick={(e) => handleHomeLinkClick(e, 'process')}
                                 >
-                                    <span className="mobile-link-num">03</span>
+                                    <span className="mobile-link-num">04</span>
                                     <span className="mobile-link-text">Our Process</span>
                                 </a>
                             </>
